@@ -3,8 +3,6 @@ import NextLink from 'next/link';
 import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
 import { Logo } from 'src/components/logo';
 
-// TODO: Change subtitle text
-
 export const Layout = (props) => {
   const { children } = props;
 
@@ -40,17 +38,17 @@ export const Layout = (props) => {
               width: '100%'
             }}
           >
-            <Box
-              component={NextLink}
-              href="/"
-              sx={{
-                display: 'inline-flex',
-                height: 32,
-                width: 32
-              }}
-            >
-              <Logo />
-            </Box>
+          <Box
+            component={NextLink}
+            href="/"
+            sx={{
+              display: 'inline-flex',
+              height: 32,
+              width: 32
+            }}
+          >
+            <Logo />
+          </Box>
           </Box>
           {children}
         </Grid>
@@ -85,20 +83,19 @@ export const Layout = (props) => {
                 sx={{ color: '#15B79E' }}
                 target="_blank"
               >
-                Devias Kit
+               Circles Connect
               </Box>
             </Typography>
-            <Typography
-              align="center"
-              sx={{ mb: 3 }}
-              variant="subtitle1"
+            <Box
+            sx={{ display: 'flex',justifyContent:"center",alignItems:"center" }}
             >
-              A professional kit that comes with ready-to-use MUI components.
-            </Typography>
             <img
-              alt=""
-              src="/assets/auth-illustration.svg"
+              width="80%"
+              height="80%"
+              alt="Logo"
+              src="/assets/CirclesConnect.png"
             />
+            </Box>
           </Box>
         </Grid>
       </Grid>

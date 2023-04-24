@@ -16,7 +16,6 @@ const initialState = {
 const handlers = {
   [HANDLERS.INITIALIZE]: (state, action) => {
     const user = action.payload;
-
     return {
       ...state,
       ...(
@@ -65,7 +64,6 @@ export const AuthProvider = (props) => {
   const initialized = useRef(false);
 
   const initialize = async () => {
-    // Prevent from calling twice in development mode with React.StrictMode enabled
     if (initialized.current) {
       return;
     }
@@ -84,8 +82,8 @@ export const AuthProvider = (props) => {
       const user = {
         id: '5e86809283e28b96d2d38537',
         avatar: '/assets/avatars/avatar-anika-visser.png',
-        name: 'Anika Visser',
-        email: 'anika.visser@devias.io'
+        name: 'Admin',
+        email: 'admin@circleconnect.com'
       };
 
       dispatch({
@@ -117,8 +115,8 @@ export const AuthProvider = (props) => {
     const user = {
       id: '5e86809283e28b96d2d38537',
       avatar: '/assets/avatars/avatar-anika-visser.png',
-      name: 'Anika Visser',
-      email: 'anika.visser@devias.io'
+      name: 'Admin',
+      email: 'admin@circleconnect.com'
     };
 
     dispatch({
@@ -128,7 +126,7 @@ export const AuthProvider = (props) => {
   };
 
   const signIn = async (email, password) => {
-    if (email !== 'demo@devias.io' || password !== 'Password123!') {
+    if (email !== 'admin@circleconnect.com' || password !== 'Password123!') {
       throw new Error('Please check your email and password');
     }
 
@@ -140,9 +138,9 @@ export const AuthProvider = (props) => {
 
     const user = {
       id: '5e86809283e28b96d2d38537',
-      avatar: '/assets/avatars/avatar-anika-visser.png',
-      name: 'Anika Visser',
-      email: 'anika.visser@devias.io'
+      avatar: '/assets/avatars/avatar-omar-darboe.png',
+      name: 'Admin',
+      email: 'admin@circleconnect.com'
     };
 
     dispatch({
