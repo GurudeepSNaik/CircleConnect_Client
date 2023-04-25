@@ -20,94 +20,94 @@ export const items = [
   // },
   {
     title: 'Users',
-    path: '/customers',
+    path: '/users',
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
       </SvgIcon>
     )
   },
-  {
-    title: 'Profiles',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Cities',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Countries',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Educations',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Experiences',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Industries',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Jobs',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Provisions',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Qualifications',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
+  // {
+  //   title: 'Profiles',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Cities',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Countries',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Educations',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Experiences',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Industries',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Jobs',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Provisions',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+  // {
+  //   title: 'Qualifications',
+  //   path: '/customers',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
   // {
   //   title: 'Account',
   //   path: '/account',

@@ -31,10 +31,10 @@ export const CustomersTable = (props) => {
     rowsPerPage = 0,
     selected = []
   } = props;
-
+console.log(items)
   const selectedSome = (selected.length > 0) && (selected.length < items.length);
   const selectedAll = (items.length > 0) && (selected.length === items.length);
-
+console.log()
   return (
     <Card>
       <Scrollbar>
@@ -75,7 +75,7 @@ export const CustomersTable = (props) => {
             <TableBody>
               {items.map((customer) => {
                 const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+                const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
 
                 return (
                   <TableRow
@@ -101,9 +101,6 @@ export const CustomersTable = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Avatar src={customer.avatar}>
-                          {getInitials(customer.name)}
-                        </Avatar>
                         <Typography variant="subtitle2">
                           {customer.name}
                         </Typography>
@@ -113,10 +110,10 @@ export const CustomersTable = (props) => {
                       {customer.email}
                     </TableCell>
                     <TableCell>
-                      {customer.address.city}, {customer.address.state}, {customer.address.country}
+                      {customer.city}, {customer.province}, {customer.country}
                     </TableCell>
                     <TableCell>
-                      {customer.phone}
+                      {customer.mobile}
                     </TableCell>
                     <TableCell>
                       {createdAt}
