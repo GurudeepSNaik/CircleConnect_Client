@@ -1,9 +1,9 @@
 {
   "name": "material-kit-react",
   "version": "3.0.0",
-  "author": "Devias",
+  "author": "Circles Connect",
   "licence": "MIT",
-  "homepage": "https://devias.io",
+  "homepage": "http://156.67.218.225:3000/",
   "private": false,
   "scripts": {
     "dev": "next",
