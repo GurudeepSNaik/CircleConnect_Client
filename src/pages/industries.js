@@ -1,42 +1,34 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
-import { subDays, subHours } from 'date-fns';
-import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
-import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import { Box, Button, Container, Stack, SvgIcon, Typography,Modal } from '@mui/material';
+import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
 import { useSelection } from 'src/hooks/use-selection';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { CustomersTable } from 'src/sections/user/customers-table';
-import { CustomersSearch } from 'src/sections/user/customers-search';
+import { CustomersTable } from 'src/sections/industries/customers-table';
+import { CustomersSearch } from 'src/sections/industries/customers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
-import { url } from '../../constants';
 import { useAuth } from 'src/hooks/use-auth';
-import axios from 'axios';
-import { AddUser } from 'src/sections/user/AddUser';
-import { UserDetails } from 'src/sections/user/UserDetails';
+import { AddIndustry } from 'src/sections/industries/AddIndustry';
 import ListBulletIcon from '@heroicons/react/24/solid/ListBulletIcon';
 
 const Page = () => {
-  const auth = useAuth();
-  const {getUsers,users}=auth
+  const {getIndustries,industries}= useAuth()
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [component, setComponent] = useState("USERS");
-  const [detail, setDetail] = useState({});
+  const [component, setComponent] = useState("INDUSTRIES");
   const useCustomers = (page, rowsPerPage) => {
     return useMemo(
       () => {
-        return applyPagination(users, page, rowsPerPage);
+        return applyPagination(industries, page, rowsPerPage);
       },
-      [page, rowsPerPage,users]
+      [page, rowsPerPage,industries]
     );
   };
   
   const useCustomerIds = (customers) => {
     return useMemo(
       () => {
-        return customers.map((customer) => customer.userId);
+        return customers.map((customer) => customer.industryId);
       },
       [customers]
     );
@@ -58,15 +50,12 @@ const Page = () => {
     []
   );
   useEffect(()=>{
-    getUsers();
+    getIndustries();
   },[])
   const handleAddUser=(to)=>{
-      setComponent(to)
-  }
-  const onDetailClick=(detail)=>{
-      setDetail(detail);
-      setComponent("USER_DETAILS");
-  }
+    setComponent(to)
+}
+
   return (
     <>
       <Head>
@@ -90,37 +79,36 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Users
+                  Industries
                 </Typography>
               </Stack>
               <div>
                 <Button
-                  onClick={()=>handleAddUser(component==="USERS" ? "ADD_USER":"USERS")}
+                  onClick={()=>handleAddUser(component==="INDUSTRIES" ? "ADD_INDUSTRY":"INDUSTRIES")}
                   startIcon={(
-                    component==="USERS" && 
-                    <SvgIcon fontSize="small">
+                    component==="INDUSTRIES" && 
+                    (<SvgIcon fontSize="small">
                     <PlusIcon />
-                    </SvgIcon>
+                    </SvgIcon>)
                     ||
-                    component==="ADD_USER" && 
+                    component==="ADD_INDUSTRY" && 
                     <SvgIcon fontSize="small">
                     <ListBulletIcon/>
                     </SvgIcon>
                   )}
                   variant="contained"
                 >
-                  {component==="USERS" && "Add"}
-                  {component==="ADD_USER" && "List"}
-                  {component==="USER_DETAILS" && "List"}
+                  {component==="INDUSTRIES" && "Add"}
+                  {component==="ADD_INDUSTRY" && "List"}
                 </Button>
               </div>
             </Stack>
-          {component==="USERS" &&
+          {component==="INDUSTRIES" &&
           <>
           <CustomersSearch />
             {
-              users.length >0 && <CustomersTable
-              count={users.length}
+              industries.length >0 && <CustomersTable
+              count={industries.length}
               items={customers}
               onDeselectAll={customersSelection.handleDeselectAll}
               onDeselectOne={customersSelection.handleDeselectOne}
@@ -131,20 +119,13 @@ const Page = () => {
               page={page}
               rowsPerPage={rowsPerPage}
               selected={customersSelection.selected}
-              onRowClick={onDetailClick}
             />
             }
           </>
            }  
-           {component==="ADD_USER" &&
-           <AddUser
+           {component==="ADD_INDUSTRY" &&
+           <AddIndustry
             setComponent={setComponent}
-           />
-           }
-           {component==="USER_DETAILS" &&
-           <UserDetails
-            setComponent={setComponent}
-            details={detail}
            />
            }
           </Stack>

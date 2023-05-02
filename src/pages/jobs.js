@@ -1,42 +1,38 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
-import { subDays, subHours } from 'date-fns';
-import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
-import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import { Box, Button, Container, Stack, SvgIcon, Typography,Modal } from '@mui/material';
+import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
 import { useSelection } from 'src/hooks/use-selection';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { CustomersTable } from 'src/sections/user/customers-table';
-import { CustomersSearch } from 'src/sections/user/customers-search';
+import { CustomersTable } from 'src/sections/job/customers-table';
+import { CustomersSearch } from 'src/sections/job/customers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
-import { url } from '../../constants';
 import { useAuth } from 'src/hooks/use-auth';
-import axios from 'axios';
-import { AddUser } from 'src/sections/user/AddUser';
-import { UserDetails } from 'src/sections/user/UserDetails';
+import { AddJob, AddUser } from 'src/sections/job/AddJob';
+import { JobDetails } from 'src/sections/job/JobDetails';
 import ListBulletIcon from '@heroicons/react/24/solid/ListBulletIcon';
 
 const Page = () => {
   const auth = useAuth();
-  const {getUsers,users}=auth
+  const {getJobs,jobs}=auth
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [component, setComponent] = useState("USERS");
+  const [component, setComponent] = useState("JOBS");
   const [detail, setDetail] = useState({});
+  console.log(jobs)
   const useCustomers = (page, rowsPerPage) => {
     return useMemo(
       () => {
-        return applyPagination(users, page, rowsPerPage);
+        return applyPagination(jobs, page, rowsPerPage);
       },
-      [page, rowsPerPage,users]
+      [page, rowsPerPage,jobs]
     );
   };
   
   const useCustomerIds = (customers) => {
     return useMemo(
       () => {
-        return customers.map((customer) => customer.userId);
+        return customers.map((customer) => customer.jobId);
       },
       [customers]
     );
@@ -58,15 +54,15 @@ const Page = () => {
     []
   );
   useEffect(()=>{
-    getUsers();
+    getJobs();
   },[])
   const handleAddUser=(to)=>{
-      setComponent(to)
-  }
+    setComponent(to)
+}
   const onDetailClick=(detail)=>{
-      setDetail(detail);
-      setComponent("USER_DETAILS");
-  }
+    setDetail(detail);
+    setComponent("JOB_DETAILS");
+}
   return (
     <>
       <Head>
@@ -90,37 +86,38 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Users
+                  Jobs
                 </Typography>
               </Stack>
               <div>
                 <Button
-                  onClick={()=>handleAddUser(component==="USERS" ? "ADD_USER":"USERS")}
+                  onClick={()=>handleAddUser(component==="JOBS" ? "ADD_JOBS":"JOBS")}
                   startIcon={(
                     component==="USERS" && 
                     <SvgIcon fontSize="small">
                     <PlusIcon />
                     </SvgIcon>
                     ||
-                    component==="ADD_USER" && 
+                    component==="ADD_JOBS" && 
                     <SvgIcon fontSize="small">
                     <ListBulletIcon/>
                     </SvgIcon>
+                    
                   )}
                   variant="contained"
                 >
-                  {component==="USERS" && "Add"}
-                  {component==="ADD_USER" && "List"}
-                  {component==="USER_DETAILS" && "List"}
+                  {component==="JOBS" && "Add"}
+                  {component==="ADD_JOBS" && "List"}
+                  {component==="JOB_DETAILS" && "List"}
                 </Button>
               </div>
             </Stack>
-          {component==="USERS" &&
+          {component==="JOBS" &&
           <>
           <CustomersSearch />
             {
-              users.length >0 && <CustomersTable
-              count={users.length}
+              jobs.length >0 && <CustomersTable
+              count={jobs.length}
               items={customers}
               onDeselectAll={customersSelection.handleDeselectAll}
               onDeselectOne={customersSelection.handleDeselectOne}
@@ -136,13 +133,13 @@ const Page = () => {
             }
           </>
            }  
-           {component==="ADD_USER" &&
-           <AddUser
+           {component==="ADD_JOBS" &&
+           <AddJob
             setComponent={setComponent}
            />
            }
-           {component==="USER_DETAILS" &&
-           <UserDetails
+           {component==="JOB_DETAILS" &&
+           <JobDetails
             setComponent={setComponent}
             details={detail}
            />

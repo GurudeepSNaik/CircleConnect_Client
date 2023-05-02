@@ -1,5 +1,7 @@
-import { createContext, useContext, useEffect, useReducer, useRef } from 'react';
+import { createContext, useContext, useEffect, useReducer, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { url } from "../../constants"
+import axios from 'axios';
 
 const HANDLERS = {
   INITIALIZE: 'INITIALIZE',
@@ -62,6 +64,13 @@ export const AuthProvider = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
   const initialized = useRef(false);
+  const [jobPoster,setJobPoster]=useState([]);
+  const [workers,setWorkers]=useState([]);
+  const [users,setUsers]=useState([]);
+  const [jobs,setJobs]=useState([]);
+  const [industries,setIndustries]=useState([]);
+  const [countries,setCountries]=useState([]);
+  const [province,setProvince]=useState([]);
 
   const initialize = async () => {
     if (initialized.current) {
@@ -159,6 +168,55 @@ export const AuthProvider = (props) => {
     });
   };
 
+  const getUsers=async()=>{
+    const res=await axios.get(`${url}/user/getuser`);
+    if(res.data.status===1){
+      setUsers(res.data.list)
+      setWorkers(res.data.list.filter((each)=>each.type==="worker"));
+      setJobPoster(res.data.list.filter((each)=>each.type!=="worker"))
+    }else{
+      setJobPoster([])
+      setWorkers([])
+      setUsers([])
+    }
+    }
+  const getJobs=async()=>{
+    const res=await axios.get(`${url}/job/search`);
+    if(res.data.status===1){
+      setJobs(res.data.list)
+    }else{
+      setJobs([])
+    }
+    }
+  const getIndustries=async()=>{
+    const res=await axios.get(`${url}/industry/get`);
+    if(res.data.status===1){
+      setIndustries(res.data.list)
+    }else{
+      setIndustries([])
+    }
+    }
+  const getCountries=async()=>{
+    const res=await axios.get(`${url}/auth/country`);
+    if(res.data.status===1){
+      setCountries(res.data.list)
+    }else{
+      setCountries([])
+    }
+    }
+  const getProvince=async(code)=>{
+    console.log(code);
+    const data={
+      "countryCode":code
+    }
+    const res=await axios.post(`${url}/auth/province`,data);
+    if(res.data.status===1){
+      setProvince(res.data.list)
+    }else{
+      setProvince([])
+    }
+    }
+
   return (
     <AuthContext.Provider
       value={{
@@ -166,7 +224,19 @@ export const AuthProvider = (props) => {
         skip,
         signIn,
         signUp,
-        signOut
+        signOut,
+        jobPoster,
+        getUsers,
+        workers,
+        users,
+        getJobs,
+        jobs,
+        industries,
+        getIndustries,
+        countries,
+        getCountries,
+        province,
+        getProvince
       }}
     >
       {children}

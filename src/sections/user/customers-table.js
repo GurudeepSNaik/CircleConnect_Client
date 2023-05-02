@@ -29,12 +29,11 @@ export const CustomersTable = (props) => {
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
+    onRowClick
   } = props;
-console.log(items)
   const selectedSome = (selected.length > 0) && (selected.length < items.length);
   const selectedAll = (items.length > 0) && (selected.length === items.length);
-console.log()
   return (
     <Card>
       <Scrollbar>
@@ -56,6 +55,9 @@ console.log()
                   />
                 </TableCell>
                 <TableCell>
+                  Id
+                </TableCell>
+                <TableCell>
                   Name
                 </TableCell>
                 <TableCell>
@@ -63,6 +65,9 @@ console.log()
                 </TableCell>
                 <TableCell>
                   Location
+                </TableCell>
+                <TableCell>
+                  Type
                 </TableCell>
                 <TableCell>
                   Phone
@@ -74,13 +79,12 @@ console.log()
             </TableHead>
             <TableBody>
               {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
+                const isSelected = selected.includes(customer.userId);
                 const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
-
                 return (
                   <TableRow
                     hover
-                    key={customer.id}
+                    key={customer.userId}
                     selected={isSelected}
                   >
                     <TableCell padding="checkbox">
@@ -88,14 +92,25 @@ console.log()
                         checked={isSelected}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onSelectOne?.(customer.id);
+                            onSelectOne?.(customer.userId);
                           } else {
-                            onDeselectOne?.(customer.id);
+                            onDeselectOne?.(customer.userId);
                           }
                         }}
                       />
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
+                      <Stack
+                        alignItems="center"
+                        direction="row"
+                        spacing={2}
+                      >
+                        <Typography variant="subtitle2">
+                          {customer.userId}
+                        </Typography>
+                      </Stack>
+                    </TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
                       <Stack
                         alignItems="center"
                         direction="row"
@@ -106,16 +121,19 @@ console.log()
                         </Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
                       {customer.email}
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
                       {customer.city}, {customer.province}, {customer.country}
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
+                      {customer.type.toUpperCase()}
+                    </TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
                       {customer.mobile}
                     </TableCell>
-                    <TableCell>
+                    <TableCell onClick={()=>onRowClick(customer)}>
                       {createdAt}
                     </TableCell>
                   </TableRow>
