@@ -1,10 +1,30 @@
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import { Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material';
+import { useAuth } from 'src/hooks/use-auth';
 
-export const CustomersSearch = () => (
+export const CustomersSearch = () => {
+  const {getJobs}=useAuth()
+  let debounceTimer;
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  const search = (e) => {
+    debounce(() => {
+      if (e.target.value === "") {
+        getJobs();
+      } else {
+        getJobs(e.target.value);
+      }
+    }, 500);
+  };
+  
+  return (
   <Card sx={{ p: 2 }}>
     <OutlinedInput
-      defaultValue=""
+      onChange={search}
       fullWidth
       placeholder="Search Jobs"
       startAdornment={(
@@ -20,4 +40,5 @@ export const CustomersSearch = () => (
       sx={{ maxWidth: 500 }}
     />
   </Card>
-);
+  )
+}

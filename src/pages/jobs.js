@@ -19,7 +19,6 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [component, setComponent] = useState("JOBS");
   const [detail, setDetail] = useState({});
-  console.log(jobs)
   const useCustomers = (page, rowsPerPage) => {
     return useMemo(
       () => {
@@ -102,7 +101,6 @@ const Page = () => {
                     <SvgIcon fontSize="small">
                     <ListBulletIcon/>
                     </SvgIcon>
-                    
                   )}
                   variant="contained"
                 >
@@ -116,7 +114,7 @@ const Page = () => {
           <>
           <CustomersSearch />
             {
-              jobs.length >0 && <CustomersTable
+              jobs.length > 0 && <CustomersTable
               count={jobs.length}
               items={customers}
               onDeselectAll={customersSelection.handleDeselectAll}
