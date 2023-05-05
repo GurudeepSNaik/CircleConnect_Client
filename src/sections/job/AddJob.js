@@ -50,7 +50,6 @@ export const AddJob = (props) => {
       try {
         const res = await axios.post(`${url}/job/add`, values);
         if (res.data.status === 1) {
-          alert("Success");
           window.location.reload();
         } else {
           alert(res.data.message);
@@ -335,8 +334,19 @@ export const AddJob = (props) => {
               <Grid container spacing={2} margin={2}>
                 <Grid item xs={6}></Grid>
                 <Grid item xs={6}>
-                  <Button fullWidth size="large" type="submit" variant="contained">
-                    Add User
+                  <Button
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#ec3e97",
+                      "&:hover": {
+                        backgroundColor: "#50c2b5",
+                      },
+                    }}
+                  >
+                    Add Job
                   </Button>
                 </Grid>
               </Grid>

@@ -15,7 +15,6 @@ export const AddIndustry = (props) => {
         const data = { industry: values.category };
         const res = await axios.post(`${url}/industry/add`, data);
         if (res.data.status === 1) {
-          alert("Success")
           window.location.reload();
         } else {
           alert(res.data.message);
@@ -66,11 +65,24 @@ export const AddIndustry = (props) => {
                   />
                 </Grid>
               </Grid>
-                <Grid container spacing={2} margin={2}>
+              <Grid container spacing={2} margin={2}>
                 <Grid item xs={2}>
-                <Button fullWidth size="small" type="submit" variant="contained">Add Industry</Button>
+                  <Button
+                    fullWidth
+                    size="small"
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#ec3e97",
+                      "&:hover": {
+                        backgroundColor: "#50c2b5",
+                      },
+                    }}
+                  >
+                    Add Industry
+                  </Button>
                 </Grid>
-                </Grid>
+              </Grid>
               {formik.errors.submit && (
                 <Typography color="error" sx={{ mt: 3 }} variant="body2">
                   {formik.errors.submit}

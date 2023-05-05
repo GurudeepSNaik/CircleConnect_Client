@@ -1,4 +1,14 @@
-import { Grid, Box, Button, TextField, Typography, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Button,
+  TextField,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "src/hooks/use-auth";
@@ -36,7 +46,6 @@ export const AddUser = (props) => {
       try {
         const res = await axios.post(`${url}/user/adduser`, values);
         if (res.data.status === 1) {
-          alert("Success")
           window.location.reload();
         } else {
           alert(res.data.message);
@@ -148,7 +157,9 @@ export const AddUser = (props) => {
                       onChange={(event) => {
                         formik.setFieldValue("country", event.target.value);
                         formik.setFieldTouched("country", true);
-                        const code=countries.find((each)=>each.name===event.target.value).code
+                        const code = countries.find(
+                          (each) => each.name === event.target.value
+                        ).code;
                         getProvince(code);
                       }}
                     >
@@ -248,7 +259,18 @@ export const AddUser = (props) => {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Button fullWidth size="large" type="submit" variant="contained">
+                  <Button
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#ec3e97",
+                      "&:hover": {
+                        backgroundColor: "#50c2b5",
+                      },
+                    }}
+                  >
                     Add User
                   </Button>
                 </Grid>

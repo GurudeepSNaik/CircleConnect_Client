@@ -48,32 +48,11 @@ export const SideNav = (props) => {
             href="/users"
             sx={{
               display: 'inline-flex',
-              height: 32,
-              width: 32
+              height: "50%",
+              width: "100%"
             }}
           >
             <Logo />
-          </Box>
-          <Box
-            sx={{
-              alignItems: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.04)',
-              borderRadius: 1,
-              cursor: 'pointer',
-              display: 'flex',
-              justifyContent: 'space-between',
-              mt: 2,
-              p: '12px'
-            }}
-          >
-            <div>
-              <Typography
-                color="inherit"
-                variant="subtitle1"
-              >
-                Circle Connect
-              </Typography>
-            </div>
           </Box>
         </Box>
         <Divider sx={{ borderColor: 'neutral.700' }} />

@@ -169,7 +169,15 @@ export const AuthProvider = (props) => {
     else data = {};
     const res = await axios.post(`${url}/user/getuser`, data);
     if (res.data.status === 1) {
-      setUsers(res.data.list);
+      setUsers(res.data.list.filter((each)=>each.type!=="admin"));
+    } else {
+      setUsers([]);
+    }
+  };
+  const deleteUser = async (id) => {
+    const res = await axios.delete(`${url}/user/delete/${id}`);
+    if (res.data.status === 1) {
+      setUsers(res.data.list.filter((each)=>each.type!=="admin"));
     } else {
       setUsers([]);
     }
@@ -186,6 +194,15 @@ export const AuthProvider = (props) => {
       setJobs([]);
     }
   };
+
+  const deleteJob=async(id)=>{
+    const res = await axios.delete(`${url}/job/delete/${id}`);
+    if (res.data.status === 1) {
+      setJobs(res.data.list);
+    } else {
+      setJobs([]);
+    }
+  }
   const getIndustries = async (search) => {
     let data;
     if (search && search !== "") data = { search: search };
@@ -228,8 +245,10 @@ export const AuthProvider = (props) => {
         signOut,
         getUsers,
         users,
+        deleteUser,
         getJobs,
         jobs,
+        deleteJob,
         industries,
         getIndustries,
         countries,

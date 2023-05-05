@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import {
-  Avatar,
   Box,
   Card,
   Checkbox,
@@ -12,10 +11,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { Scrollbar } from 'src/components/scrollbar';
-import { getInitials } from 'src/utils/get-initials';
+  Typography,
+} from "@mui/material";
+import { Scrollbar } from "src/components/scrollbar";
 
 export const CustomersTable = (props) => {
   const {
@@ -30,10 +28,10 @@ export const CustomersTable = (props) => {
     page = 0,
     rowsPerPage = 0,
     selected = [],
-    onRowClick
+    onRowClick,
   } = props;
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
+  const selectedSome = selected.length > 0 && selected.length < items.length;
+  const selectedAll = items.length > 0 && selected.length === items.length;
   return (
     <Card>
       <Scrollbar>
@@ -54,39 +52,21 @@ export const CustomersTable = (props) => {
                     }}
                   />
                 </TableCell>
-                <TableCell>
-                  Id
-                </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Type
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Signed Up
-                </TableCell>
+                <TableCell>Id</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Location</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Phone</TableCell>
+                <TableCell>Signed Up</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((customer) => {
                 const isSelected = selected.includes(customer.userId);
-                const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
+                const createdAt = format(new Date(customer.createdAt), "dd/MM/yyyy");
                 return (
-                  <TableRow
-                    hover
-                    key={customer.userId}
-                    selected={isSelected}
-                  >
+                  <TableRow hover key={customer.userId} selected={isSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
@@ -99,43 +79,25 @@ export const CustomersTable = (props) => {
                         }}
                       />
                     </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
-                      <Stack
-                        alignItems="center"
-                        direction="row"
-                        spacing={2}
-                      >
-                        <Typography variant="subtitle2">
-                          {customer.userId}
-                        </Typography>
+                    <TableCell onClick={() => onRowClick(customer)}>
+                      <Stack alignItems="center" direction="row" spacing={2}>
+                        <Typography variant="subtitle2">{customer.userId}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
-                      <Stack
-                        alignItems="center"
-                        direction="row"
-                        spacing={2}
-                      >
-                        <Typography variant="subtitle2">
-                          {customer.name}
-                        </Typography>
+                    <TableCell onClick={() => onRowClick(customer)}>
+                      <Stack alignItems="center" direction="row" spacing={2}>
+                        <Typography variant="subtitle2">{customer.name}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
-                      {customer.email}
-                    </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
+                    <TableCell onClick={() => onRowClick(customer)}>{customer.email}</TableCell>
+                    <TableCell onClick={() => onRowClick(customer)}>
                       {customer.city}, {customer.province}, {customer.country}
                     </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
+                    <TableCell onClick={() => onRowClick(customer)}>
                       {customer.type.toUpperCase()}
                     </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
-                      {customer.mobile}
-                    </TableCell>
-                    <TableCell onClick={()=>onRowClick(customer)}>
-                      {createdAt}
-                    </TableCell>
+                    <TableCell onClick={() => onRowClick(customer)}>{customer.mobile}</TableCell>
+                    <TableCell onClick={() => onRowClick(customer)}>{createdAt}</TableCell>
                   </TableRow>
                 );
               })}
@@ -167,5 +129,5 @@ CustomersTable.propTypes = {
   onSelectOne: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
-  selected: PropTypes.array
+  selected: PropTypes.array,
 };

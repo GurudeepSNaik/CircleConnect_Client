@@ -92,7 +92,7 @@ const Page = () => {
                 <Button
                   onClick={()=>handleAddUser(component==="JOBS" ? "ADD_JOBS":"JOBS")}
                   startIcon={(
-                    component==="USERS" && 
+                    component==="JOBS" && 
                     <SvgIcon fontSize="small">
                     <PlusIcon />
                     </SvgIcon>
@@ -103,6 +103,12 @@ const Page = () => {
                     </SvgIcon>
                   )}
                   variant="contained"
+                  sx={{
+                    backgroundColor: "#ec3e97",
+                    "&:hover": {
+                      backgroundColor: "#50c2b5",
+                    },
+                  }}
                 >
                   {component==="JOBS" && "Add"}
                   {component==="ADD_JOBS" && "List"}
@@ -112,7 +118,7 @@ const Page = () => {
             </Stack>
           {component==="JOBS" &&
           <>
-          <CustomersSearch />
+          <CustomersSearch customersSelection={customersSelection}/>
             {
               jobs.length > 0 && <CustomersTable
               count={jobs.length}

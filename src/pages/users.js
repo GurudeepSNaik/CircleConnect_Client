@@ -108,6 +108,12 @@ const Page = () => {
                     </SvgIcon>
                   )}
                   variant="contained"
+                  sx={{
+                    backgroundColor: "#ec3e97",
+                    "&:hover": {
+                      backgroundColor: "#50c2b5",
+                    },
+                  }}
                 >
                   {component==="USERS" && "Add"}
                   {component==="ADD_USER" && "List"}
@@ -117,7 +123,7 @@ const Page = () => {
             </Stack>
           {component==="USERS" &&
           <>
-          <CustomersSearch />
+          <CustomersSearch customersSelection={customersSelection}/>
             {
               users.length >0 && <CustomersTable
               count={users.length}
