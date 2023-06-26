@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { url } from "../../../constants";
 import axios from "axios";
+import { baseAxios } from "src/contexts/utils/base-axios";
 
 export const AddIndustry = (props) => {
   const formik = useFormik({
@@ -13,7 +14,7 @@ export const AddIndustry = (props) => {
     onSubmit: async (values, helpers) => {
       try {
         const data = { industry: values.category };
-        const res = await axios.post(`${url}/industry/add`, data);
+        const res = await baseAxios.post(`/industry/add`, data);
         if (res.data.status === 1) {
           window.location.reload();
         } else {

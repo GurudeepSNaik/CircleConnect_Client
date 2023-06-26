@@ -48,7 +48,7 @@ export const AddJob = (props) => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        const res = await axios.post(`${url}/job/add`, values);
+        const res = await baseAxios.post(`/job/add`, values);
         if (res.data.status === 1) {
           window.location.reload();
         } else {

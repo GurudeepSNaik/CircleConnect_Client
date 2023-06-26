@@ -44,7 +44,7 @@ export const AddUser = (props) => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        const res = await axios.post(`${url}/user/adduser`, values);
+        const res = await baseAxios.post(`/user/adduser`, values);
         if (res.data.status === 1) {
           window.location.reload();
         } else {
