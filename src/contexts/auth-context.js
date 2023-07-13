@@ -66,6 +66,7 @@ export const AuthProvider = (props) => {
   const [industries, setIndustries] = useState([]);
   const [countries, setCountries] = useState([]);
   const [province, setProvince] = useState([]);
+  const [applications, setApplications] = useState([]);
 
   const initialize = async () => {
     if (initialized.current) {
@@ -175,7 +176,7 @@ export const AuthProvider = (props) => {
     else data = {};
     const res = await baseAxios.post(`/user/getuser`, data);
     if (res.data.status === 1) {
-      setUsers(res.data.list.filter((each)=>each.type!=="admin"));
+      setUsers(res.data.list.filter((each) => each.type !== "admin"));
     } else {
       setUsers([]);
     }
@@ -183,7 +184,7 @@ export const AuthProvider = (props) => {
   const deleteUser = async (id) => {
     const res = await baseAxios.delete(`/user/delete/${id}`);
     if (res.data.status === 1) {
-      setUsers(res.data.list.filter((each)=>each.type!=="admin"));
+      setUsers(res.data.list.filter((each) => each.type !== "admin"));
     } else {
       setUsers([]);
     }
@@ -201,19 +202,19 @@ export const AuthProvider = (props) => {
     }
   };
 
-  const deleteJob=async(id)=>{
+  const deleteJob = async (id) => {
     const res = await baseAxios.delete(`/job/delete/${id}`);
     if (res.data.status === 1) {
       setJobs(res.data.list);
     } else {
       setJobs([]);
     }
-  }
+  };
   const getIndustries = async (search) => {
     let data;
     if (search && search !== "") data = { search: search };
     else data = {};
-    const res = await baseAxios.post(`/industry/get`,data);
+    const res = await baseAxios.post(`/industry/get`, data);
     if (res.data.status === 1) {
       setIndustries(res.data.list);
     } else {
@@ -241,6 +242,15 @@ export const AuthProvider = (props) => {
     }
   };
 
+  const getApplications = async (search = "") => {
+    const res = await baseAxios.get(`/application/getApplications?length=1000&search=${search}`);
+    if (res.data.status === 1) {
+      setApplications(res.data.list);
+    } else {
+      setApplications([]);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -261,6 +271,9 @@ export const AuthProvider = (props) => {
         getCountries,
         province,
         getProvince,
+
+        applications,
+        getApplications,
       }}
     >
       {children}
