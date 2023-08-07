@@ -174,80 +174,159 @@ export const AuthProvider = (props) => {
     let data;
     if (search && search !== "") data = { search: search };
     else data = {};
-    const res = await baseAxios.post(`/user/getuser`, data);
-    if (res.data.status === 1) {
-      setUsers(res.data.list.filter((each) => each.type !== "admin"));
-    } else {
-      setUsers([]);
+    try {
+      const res = await baseAxios.post(`/user/getuser`, data);
+      if (res.data.status === 1) {
+        setUsers(res.data.list.filter((each) => each.type !== "admin"));
+      } else {
+        setUsers([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
   const deleteUser = async (id) => {
-    const res = await baseAxios.delete(`/user/delete/${id}`);
-    if (res.data.status === 1) {
-      setUsers(res.data.list.filter((each) => each.type !== "admin"));
-    } else {
-      setUsers([]);
+    try {
+      const res = await baseAxios.delete(`/user/delete/${id}`);
+      if (res.data.status === 1) {
+        setUsers(res.data.list.filter((each) => each.type !== "admin"));
+      } else {
+        setUsers([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
 
   const getJobs = async (search) => {
-    let data;
-    if (search && search !== "") data = { search: search };
-    else data = {};
-    const res = await baseAxios.post(`/job/search`, data);
-    if (res.data.status === 1) {
-      setJobs(res.data.list);
-    } else {
-      setJobs([]);
+    try {
+      let data;
+      if (search && search !== "") data = { search: search };
+      else data = {};
+      const res = await baseAxios.post(`/job/search`, data);
+      if (res.data.status === 1) {
+        setJobs(res.data.list);
+      } else {
+        setJobs([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
 
   const deleteJob = async (id) => {
-    const res = await baseAxios.delete(`/job/delete/${id}`);
-    if (res.data.status === 1) {
-      setJobs(res.data.list);
-    } else {
-      setJobs([]);
+    try {
+      const res = await baseAxios.delete(`/job/delete/${id}`);
+      if (res.data.status === 1) {
+        setJobs(res.data.list);
+      } else {
+        setJobs([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
   const getIndustries = async (search) => {
-    let data;
-    if (search && search !== "") data = { search: search };
-    else data = {};
-    const res = await baseAxios.post(`/industry/get`, data);
-    if (res.data.status === 1) {
-      setIndustries(res.data.list);
-    } else {
-      setIndustries([]);
+    try {
+      let data;
+      if (search && search !== "") data = { search: search };
+      else data = {};
+      const res = await baseAxios.post(`/industry/get`, data);
+      if (res.data.status === 1) {
+        setIndustries(res.data.list);
+      } else {
+        setIndustries([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
   const getCountries = async () => {
-    const res = await baseAxios.get(`/auth/country`);
-    if (res.data.status === 1) {
-      setCountries(res.data.list);
-    } else {
-      setCountries([]);
+    try {
+      const res = await baseAxios.get(`/auth/country`);
+      if (res.data.status === 1) {
+        setCountries(res.data.list);
+      } else {
+        setCountries([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
   const getProvince = async (code) => {
-    console.log(code);
-    const data = {
-      countryCode: code,
-    };
-    const res = await baseAxios.post(`/auth/province`, data);
-    if (res.data.status === 1) {
-      setProvince(res.data.list);
-    } else {
-      setProvince([]);
+    try {
+      const data = {
+        countryCode: code,
+      };
+      const res = await baseAxios.post(`/auth/province`, data);
+      if (res.data.status === 1) {
+        setProvince(res.data.list);
+      } else {
+        setProvince([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
 
   const getApplications = async (search = "") => {
-    const res = await baseAxios.get(`/application/getApplications?length=1000&search=${search}`);
-    if (res.data.status === 1) {
-      setApplications(res.data.list);
-    } else {
-      setApplications([]);
+    try {
+      const res = await baseAxios.get(`/application/getApplications?length=1000&search=${search}`);
+      if (res.data.status === 1) {
+        setApplications(res.data.list);
+      } else {
+        setApplications([]);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        console.log(error);
+      }
     }
   };
 

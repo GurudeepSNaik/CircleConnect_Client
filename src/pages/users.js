@@ -12,7 +12,6 @@ import { CustomersSearch } from 'src/sections/user/customers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
 import { url } from '../../constants';
 import { useAuth } from 'src/hooks/use-auth';
-import axios from 'axios';
 import { AddUser } from 'src/sections/user/AddUser';
 import { UserDetails } from 'src/sections/user/UserDetails';
 import ListBulletIcon from '@heroicons/react/24/solid/ListBulletIcon';

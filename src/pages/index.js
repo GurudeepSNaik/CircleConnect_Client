@@ -18,6 +18,7 @@ import { useSelection } from 'src/hooks/use-selection';
 import { CustomersTable } from 'src/sections/user/customers-table';
 import { CustomersSearch } from 'src/sections/user/customers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
+import { useRouter } from 'next/navigation';
 
 const now = new Date();
 const data = [
@@ -186,7 +187,8 @@ const Page = () => {
   const customers = useCustomers(page, rowsPerPage);
   const customersIds = useCustomerIds(customers);
   const customersSelection = useSelection(customersIds);
-
+  const router=useRouter();
+  router.push("/users")
   const handlePageChange = useCallback(
     (event, value) => {
       setPage(value);

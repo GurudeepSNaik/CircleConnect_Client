@@ -19,15 +19,25 @@ export const AddIndustry = (props) => {
           formData.append("industry", values.category);
           formData.append("image", image);
           error_text.style.color = "black";
-          const res = await baseAxios.post(`/industry/add`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          if (res.data.status === 1) {
-            window.location.reload();
-          } else {
-            alert(res.data.message);
+          try {
+            const res = await baseAxios.post(`/industry/add`, formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            });
+            if (res.data.status === 1) {
+              window.location.reload();
+            } else {
+              alert(res.data.message);
+            }
+          } catch (error) {
+            console.log(error);
+            if(error.response.status===401){
+              localStorage.clear();
+              window.location.reload();
+            }else{
+              console.log(error);
+            }
           }
         } else {
           error_text.style.color = "red";
