@@ -12,8 +12,11 @@ export const UserDetails = ({ details }) => {
         property !== "status" &&
         property !== "verified" &&
         property !== "otp" &&
+        property !== "profileUserId" &&
         property !== "profileId" &&
-        property !== "profilePic"
+        property !== "profilePic" && 
+        property !== "fmctoken" && 
+        property !== "firebaseId"  
       ) {
         let propertyName = "";
         if (property === "userId") propertyName = "Id";
@@ -28,7 +31,9 @@ export const UserDetails = ({ details }) => {
               <Typography variant="h6" sx={{ mb: 2 }}>
                 {propertyName.toUpperCase()}
               </Typography>
-              <Typography variant="body1">{details[property]}</Typography>
+              <Typography variant="body1">{
+                propertyName === "logged" ? details[property]===0 ?"False":"True":details[property]
+                }</Typography>
             </Paper>
           </Grid>
         );

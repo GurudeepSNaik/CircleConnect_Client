@@ -62,7 +62,7 @@ export const CustomersSearch = ({ customersSelection }) => {
         />
 
         <div>
-          {customersSelection.selected.length > 0 && (
+          {/* {customersSelection.selected.length > 0 && (
             <Button
               onClick={handleOpen}
               startIcon={
@@ -78,7 +78,7 @@ export const CustomersSearch = ({ customersSelection }) => {
             >
               Delete
             </Button>
-          )}
+          )} */}
         </div>
         <Dialog
           open={open}

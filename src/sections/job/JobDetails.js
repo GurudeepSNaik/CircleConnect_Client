@@ -9,7 +9,8 @@ export const JobDetails = ({ details }) => {
         property !== "createdAt" &&
         property !== "updatedAt" &&
         property !== "status" && 
-        property !== "popular"  
+        property !== "popular"  && 
+        property !== "companyImage"  
 
       ) {
         let propertyName = "";
@@ -26,6 +27,7 @@ export const JobDetails = ({ details }) => {
         else if (property === "minExp") propertyName = "Minimum Experience";
         else if (property === "userId") propertyName = "User Id";
         else if (property === "jobType") propertyName = "Job Type";
+        else if (property === "job_complete") propertyName = "Completed";
         else propertyName = property;
         components.push(
           <Grid item xs={6} key={property}>
@@ -33,7 +35,9 @@ export const JobDetails = ({ details }) => {
               <Typography variant="h6" sx={{ mb: 2 }}>
                 {propertyName.toUpperCase()}
               </Typography>
-              <Typography variant="body1">{details[property]}</Typography>
+              <Typography variant="body1">{
+                property==="job_complete" ?details[property]===0?"False":"True":details[property]
+                }</Typography>
             </Paper>
           </Grid>
         );
@@ -59,7 +63,7 @@ export const JobDetails = ({ details }) => {
           }}
         >
           <Grid container spacing={2} margin={2}>
-            {details.profilePic && (
+            {details.companyImage && (
               <Grid
                 item
                 xs={12}
@@ -87,7 +91,7 @@ export const JobDetails = ({ details }) => {
                       margin: "0px auto",
                       marginBottom: "40px",
                     }}
-                    src={`${url}/uploads/${details.profilePic}`}
+                    src={`${url}/uploads/${details.companyImage}`}
                     alt="Profile"
                   />
                 </div>
