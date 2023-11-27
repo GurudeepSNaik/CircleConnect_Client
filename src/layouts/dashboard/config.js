@@ -54,6 +54,15 @@ export const items = [
       </SvgIcon>
     )
   },
+  {
+    title: 'GovtPhoto Verification',
+    path: '/VerifyGovtPhoto',
+    icon: (
+      <SvgIcon fontSize="small">
+        <NewspaperIcon />
+      </SvgIcon>
+    )
+  },
   // {
   //   title: 'Countries',
   //   path: '/customers',

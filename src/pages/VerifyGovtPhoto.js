@@ -123,9 +123,10 @@ const VerifyGovtPhoto = () => {
                           </TableHead>
                           <TableBody>
                             {users.map((customer) => {
-                              console.log(customer);
+                              if(!customer.govtPhoto){
+                                return;
+                              }
                               //   const isSelected = selected.includes(customer.userId);
-                              const createdAt = format(new Date(customer.createdAt), "dd/MM/yyyy");
                               return (
                                 <TableRow hover key={customer.userId}>
                                   <TableCell onClick={() => onRowClick(customer)}>
