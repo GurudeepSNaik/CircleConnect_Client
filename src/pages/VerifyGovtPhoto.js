@@ -40,6 +40,7 @@ import { baseAxios } from "src/contexts/utils/base-axios";
 const VerifyGovtPhoto = () => {
   const auth = useAuth();
   const { getUsers, users } = auth;
+  const filteredUsers = users ? users.filter((user) => user.govtPhoto) : []; 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [component, setComponent] = useState("USERS");
@@ -107,7 +108,7 @@ const VerifyGovtPhoto = () => {
             {component === "USERS" && (
               <>
                 <CustomersSearch customersSelection={customersSelection} />
-                {users.length > 0 && (
+                {filteredUsers.length > 0 && (
                   <Card>
                     <Scrollbar>
                       <Box sx={{ minWidth: 800 }}>
@@ -122,7 +123,7 @@ const VerifyGovtPhoto = () => {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {users.map((customer) => {
+                            {filteredUsers.map((customer) => {
                               if(!customer.govtPhoto){
                                 return;
                               }
@@ -178,7 +179,7 @@ const VerifyGovtPhoto = () => {
                     </Scrollbar>
                     <TablePagination
                       component="div"
-                      count={users.length}
+                      count={filteredUsers.length}
                       onPageChange={handlePageChange}
                       //   onRowsPerPageChange={onRowsPerPageChange}
                       page={page}
